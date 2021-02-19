@@ -1,0 +1,25 @@
+#
+# ansible-playbook disk-performance-etcd.yml
+#
+
+---
+- hosts: master
+  gather_facts: false
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ https_proxy }}"
+  vars:
+    etcd_image: "quay.io/openshift-scale/etcd-perf"
+
+  tasks:
+    - name: Use 'fio' to Check Etcd Disk Performance
+      shell:
+        cmd: "podman run --volume /var/lib/etcd:/var/lib/etcd:Z {{ etcd_image }}"
+      become: true
+      register: result
+
+    - set_fact:
+        result_regex: "99th"
+
+    - debug:
+        var: "{{ result.stdout }}"
