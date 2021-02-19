@@ -1,0 +1,18 @@
+#
+# ansible-playbook -i hosts backup-etcd.yml
+#
+
+---
+- hosts: master
+  gather_facts: false
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ https_proxy }}"
+  tasks:
+
+    - name: Perform ETCD Backup
+      import_role:
+        name: ocp4-etcd-backup
+      vars:
+        bastion_backup_dir: "/tmp"
+      run_once: true

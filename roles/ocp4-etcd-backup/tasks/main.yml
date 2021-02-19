@@ -1,0 +1,76 @@
+---
+# tasks file for roles/ocp_etcd_backup
+
+- name: "Fail when a mandatory required vars are not defined"
+  fail:
+    msg: "Required variables are not defined"
+  when: etcd_backup_dir is not defined
+        or bastion_backup_dir is not defined
+
+- name: Generate snapshot dir name
+  shell: 'echo "$(date "+%Y%m%d%H%M%S")-etcd-backup"'
+  register: tmp_backup_dir
+  changed_when: false
+
+- name: Define backup dir name
+  set_fact:
+    backup_src_dir: "{{ etcd_backup_dir }}/{{ tmp_backup_dir.stdout }}"
+    backup_dst_dir: "{{ bastion_backup_dir }}/{{ tmp_backup_dir.stdout }}"
+    etcd_tarball: "{{ tmp_backup_dir.stdout }}.tar.gz"
+
+- name: Debug Source Machine (Master) - Backup Path
+  debug:
+    msg: "Source Machine (Master) Backup Direcotory: {{ backup_src_dir }}"
+    #verbosity: 1
+
+- name: Debug Destination Machine (Bastion) - Backup Path
+  debug:
+    msg: "Destination Machine (Bastion) Backup Direcotory: {{ backup_dst_dir }}"
+    #verbosity: 1
+
+- name: Perform ETCD backup
+  shell: /usr/local/bin/cluster-backup.sh "{{ backup_src_dir }}"
+  become: true
+
+- name: Tar {{ tmp_backup_dir.stdout }}.tar.gz in ETCD node
+  archive:
+    path: "{{ backup_src_dir }}"
+    dest: "{{ etcd_tarball }}"
+    format: gz
+  become: true
+
+- name: Fetch ETCD backup dir
+  fetch:
+    src: "{{ etcd_tarball }}"
+    dest: "{{ bastion_backup_dir }}/"
+    flat: yes
+
+- name: Untar ETCD tarball in bastion node
+  unarchive:
+    src: "{{ bastion_backup_dir }}/{{ etcd_tarball }}"
+    dest: "{{ bastion_backup_dir }}"
+  connection: local
+
+# - name: Create a symbolic link to latest backup
+#   file:
+#     src: "{{ backup_dst_dir }}"
+#     dest: "{{ backup_dst_dir_latest }}"
+#     state: link
+#   delegate_to: localhost
+  
+- name: Clean backup file on etcd node
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ backup_src_dir }}"
+    - "{{ etcd_backup_dir }}/{{ etcd_tarball }}"
+  become: true
+
+- name: Clean backup file on master node
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ bastion_backup_dir }}/{{ etcd_tarball }}"
+  connection: local

@@ -1,0 +1,26 @@
+#
+# ansible-playbook -i hosts shell_prompt.yaml
+#
+
+---
+- hosts: openshift4
+  gather_facts: false
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ https_proxy }}"
+  vars_prompt:
+    - name: command
+      prompt: >
+        "Type Command# "
+      default: 'whoami'
+      private: no
+
+  tasks:
+    - name: Type Command
+      shell:
+        cmd: "{{ command }}"
+      register: result
+
+    - debug:
+        msg: "{{ result.stdout }}"
+

@@ -1,0 +1,5 @@
+---
+# backup_dst_file_latest: "{{ backup_bastion_rootdir }}/latest-snapshot.db"
+
+bastion_backup_dir: "/tmp"
+etcd_backup_dir: "/home/core"

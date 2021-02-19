@@ -1,0 +1,14 @@
+#
+# ansible-playbook -i hosts pingpong.yaml
+#
+
+---
+- hosts: openshift4
+  gather_facts: false
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ https_proxy }}"
+  tasks:
+    - name: Test Connectivity
+      ping:
+
