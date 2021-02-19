@@ -1,0 +1,15 @@
+#
+# ansible-playbook -i hosts healthcheck-etcd.yml
+#
+
+---
+- hosts: master
+  gather_facts: false
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ https_proxy }}"
+
+  tasks:
+    - name: Check ETCD Status
+      import_role:
+        name: ocp4-etcd-healthcheck

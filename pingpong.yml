@@ -8,6 +8,7 @@
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ https_proxy }}"
+
   tasks:
     - name: Test Connectivity
       ping:

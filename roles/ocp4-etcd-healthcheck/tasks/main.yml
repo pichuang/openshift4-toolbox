@@ -1,0 +1,12 @@
+---
+# tasks file for roles/ocp4-etcd-healthcheck
+
+- name: Run check_etcd.sh script
+  script:
+    cmd: check_etcd.sh
+  register: result
+
+- copy:
+    content: "{{ result.stdout }}"
+    dest: "/tmp/etcd-report-{{ ansible_ssh_host }}.txt"
+  delegate_to: localhost

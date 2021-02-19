@@ -1,5 +1,5 @@
 ---
-# tasks file for roles/ocp_etcd_backup
+# tasks file for roles/ocp4-etcd-backup
 
 - name: "Fail when a mandatory required vars are not defined"
   fail:
