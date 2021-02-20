@@ -1,0 +1,46 @@
+#
+# ansible-playbook remove-kubeadmin.yml
+#
+
+---
+- hosts: localhost
+  gather_facts: false
+
+  vars_prompt:
+    - name: read_this
+      prompt: >
+        "READ THIS FIRSTIf you follow this procedure before another user is a cluster-admin, then OpenShift Container Platform **MUST BE** reinstalled. It is not possible to undo this command. Agree? [No/yes]"
+      default: 'no'
+      private: no
+
+    - name: cluster_admin_username
+      prompt: >
+        "Type cluster_admin role Username"
+      default: ""
+      private: no
+    
+    - name: cluster_admin_password
+      prompt: >
+        "Type cluster_admin role Password"
+      default: ""
+      private: yes
+      
+  tasks:
+    - name: Exit playbook, if you dont know anything
+      fail:
+        msg: >
+          "Please read this first https://docs.openshift.com/container-platform/4.6/authentication/remove-kubeadmin.html"
+      when: read_this != 'yes'
+
+    - name: OpenShift CLI login
+      command: "oc login --insecure-skip-tls-verify=true -u {{ cluster_admin_username }} -p {{ cluster_admin_password }}"
+      no_log: true
+  
+    - name: Removing the kubeadmin user
+      command:
+        cmd: "oc delete secrets kubeadmin -n kube-system"
+      register: result
+      when: read_this != 'yes'
+    
+    - debug:
+        msg: "{{ result }}"

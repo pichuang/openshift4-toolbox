@@ -1,0 +1,24 @@
+---
+- name: Create Htpasswd Provider YAML
+  template:
+    src: oauth-template.yml
+    dest: "{{ directory_name }}/{{ identity_provider_name }}"
+
+- name: Backup Current Identity Provider
+  shell:
+    cmd: 'oc get oauth -o yaml > "$(date "+%Y%m%d%H%M%S")"-identity-provider-backup'
+    chdir: "{{ directory_name }}"
+
+- name: Apply Identity Provider - {{ identity_provider_name }}
+  command:
+    cmd: "oc apply -f {{ identity_provider_name }}"
+    chdir: "{{ directory_name }}"
+
+- name: Describe OAuth
+  command:
+    cmd: "oc describe oauth cluster"
+  register: result
+
+- name: oc describe oauth {{ identity_provider_name }} cluster
+  debug:
+    msg: "{{ result.stdout_lines }}"

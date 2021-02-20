@@ -1,0 +1,26 @@
+---
+- name: Install the latest version of http-tools
+  command: "yum install httpd-tools -y"
+
+- name: Add or Update User into htpasswd
+  block:
+    - name: Add/Update User - {{ username }}
+      command: "htpasswd -b {{ filename }} {{ username }} {{ password }}"
+      args:
+        chdir: "{{ directory_name }}"
+    
+  rescue:
+    - name: Add User - {{ username }} and Create {{ filename }}
+      command: "htpasswd -b -c {{ filename }} {{ username }} {{ password }}"
+      args:
+        chdir: "{{ directory_name }}"
+
+- name: Cat {{ filename }}
+  command: /usr/bin/cat {{ filename }}
+  args:
+    chdir: "{{ directory_name }}"
+  register: result
+
+- name: Print {{ filename }}
+  debug:
+    msg: "{{ result.stdout_lines }}"

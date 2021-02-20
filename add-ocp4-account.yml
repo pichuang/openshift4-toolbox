@@ -1,0 +1,80 @@
+#
+# ansible-playbook add-cluster-admin-account.yml
+#
+
+---
+- hosts: localhost
+  gather_facts: false
+
+  vars_prompt:
+    - name: username
+      prompt: >
+        "(Cluster Admin) Username #"
+      default: 'ocproot'
+      private: no
+    
+    - name: password
+      prompt: >
+        "(Cluster Admin) Password #"
+      default: 'ocproot'
+      private: yes
+
+    - name: cluster_role
+      prompt: >
+        "Whcih cluster_role in OCP4? [cluster-admin/cluster-status/admin/edit/self-provisioner/view/basic-user]"
+      default: 'cluster-admin'
+      private: no
+  
+    - name: directory_name
+      prompt: >
+        "Root Directory Name #"
+      default: '/tmp/local-password'
+      private: no
+
+    - name: htpasswd_filename
+      prompt: >
+        "HTPassword Filename #"
+      default: 'localuser-htpasswd'
+      private: no
+
+    - name: identity_provider_name
+      prompt: >
+        "Identity Provider Name #"
+      default: homecloud-htpasswd-provider
+      private: no
+
+  tasks:
+    - name: Create local directory to save YAML files
+      file:
+        path: "{{ directory_name }}"
+        state: directory
+
+    - name: Create htpasswd file
+      import_role:
+        name: htpasswd-secret
+      vars:
+        filename: "{{ htpasswd_filename }}"
+
+    - name: Import "{{ htpasswd_filename }}" into OpenShift 4
+      import_role:
+        name: ocp4-secret
+
+    - name: Create Identity Provider - "{{ identity_provider_name }}"
+      import_role:
+        name: ocp4-htpasswd-providers
+
+    - name: Assign Cluster Role
+      command:
+        cmd: "oc adm policy add-cluster-role-to-user {{ cluster_role }} {{ username }}"
+      register: result
+
+    - debug:
+        msg: "{{ result.stdout_lines }}"
+
+    - name: Test Login
+      command:
+        cmd: "oc login -u {{ username }} {{ password }}"
+      no_log: True
+
+
+

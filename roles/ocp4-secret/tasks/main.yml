@@ -1,0 +1,21 @@
+---
+- name: Handle Secret - {{ filename }}
+  block:
+  - name: Create Secret
+    command:
+      cmd: "oc create secret generic {{ filename }} --from-file htpasswd={{ directory_name }}/{{ filename }} -n openshift-config"
+    ignore_errors: True
+
+  rescue:
+  - name: Update Secret
+    shell: 
+      cmd: oc create secret generic {{ filename }} --from-file htpasswd={{ directory_name }}/{{ filename }} -n openshift-config --dry-run=client -o yaml | oc apply -f -
+
+- name: Describe Secret - {{ filename }}
+  command:
+    cmd: "oc describe secret {{ filename }} -n openshift-config"
+  register: result
+
+- name: oc describe secret {{ filename }}
+  debug:
+    msg: "{{ result.stdout_lines }}"
