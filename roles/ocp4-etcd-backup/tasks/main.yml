@@ -32,7 +32,7 @@
   shell: /usr/local/bin/cluster-backup.sh "{{ backup_src_dir }}"
   become: true
 
-- name: Tar {{ tmp_backup_dir.stdout }}.tar.gz in ETCD node
+- name: Tar {{ backup_src_dir }} in ETCD node
   archive:
     path: "{{ backup_src_dir }}"
     dest: "{{ etcd_tarball }}"
