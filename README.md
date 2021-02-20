@@ -33,11 +33,14 @@ _____________|','   ///_/-------------/   |
 
 ## Features
 - [x] ETCD Backup - `ansible-playbook backup-etcd.yml`
+    - Youtube: https://youtu.be/hVijextRADs
 - [ ] ETCD Restore
 - [x] Run commands to multiple nodes within one command - `./shell.sh "timedatectl | grep -i "Local time""`
 - [x] Run commands to multiple nodes with prompt mode - `ansible-playbook shell_prompt.yml`
 - [x] ETCD Health Check Report - `ansible-playbook healthcheck-etcd.yml`
+    - Youtube: https://youtu.be/FGwCmCuQNrg
 - [x] ETCD Disk Performance Report - `ansible-playbook disk-performance-etcd.yml`
+    - Youtube: https://youtu.be/6qjsh9J3ndM
 - [x] Add new account and identity provider - `ansible-playbook add-ocp4-account.yml`
 - [x] Disable default account `kubeadmin` - `ansible-playbook remove-kubeadmin.yml`
 - [x] Add Machineset on vSphere - `ansible-playbook add-vsphere-machineset.yml`
