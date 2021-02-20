@@ -21,9 +21,17 @@
 - [x] Save container images to tar archive - `ansible-playbook save-containe-images.yml`
 
 ## Prerequisite
-1. Edit `hosts` and put your environment in here
-2. Use `ansible-playbook -i hosts pingpong.yml` to connect to host and verify a usable python interpreter
+1. Edit `hosts` and put your environment first
+2. Use `ansible-playbook pingpong.yml` to connect to host and verify a usable python interpreter
 3. (Optioanl) `pip3 install -r requirements.txt`
 4. Do anything you want to
+
+## Tested Recording
+
+|   Date   | Status | OpenShift Version | Ansible Version | Bastion OS Version |
+|:--------:|:------:|:-----------------:|:---------------:|:------------------:|
+| 20210220 |   OK   |       4.6.17      |      2.9.15     |      RHEL 7.9      |
+| 20210220 |   OK   |       4.6.16      |     2.4.2.0     |      RHEL 7.9      |
+| 20210220 |   OK   |       4.5.31      |     2.4.2.0     |      RHEL 7.9      |
 
 [1]: https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation
