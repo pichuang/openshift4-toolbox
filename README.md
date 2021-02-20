@@ -1,7 +1,7 @@
 # OpenShift 4 Toolbox
 
 ## Environments
-- Red Hat OpenShift 4.6.16
+- Red Hat OpenShift 4.6.17
 - Bastion
     - Red Hat Enterprise Linux 7.9
     - Red Hat Ansible 2.9.15
