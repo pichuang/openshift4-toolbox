@@ -1,0 +1,53 @@
+---
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  creationTimestamp: null
+  labels:
+    machine.openshift.io/cluster-api-cluster: {{ infrastructure_id }} 
+  name: {{ infrastructure_id }}-{{ role }} 
+  namespace: openshift-machine-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: {{ infrastructure_id }} 
+      machine.openshift.io/cluster-api-machineset: {{ infrastructure_id }}-{{ role }} 
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        machine.openshift.io/cluster-api-cluster: {{ infrastructure_id }} 
+        machine.openshift.io/cluster-api-machine-role: {{ role }} 
+        machine.openshift.io/cluster-api-machine-type: {{ role }} 
+        machine.openshift.io/cluster-api-machineset: {{ infrastructure_id }}-{{ role }} 
+    spec:
+      metadata:
+        creationTimestamp: null
+        labels:
+          node-role.kubernetes.io/{{ role }}: "" 
+      providerSpec:
+        value:
+          apiVersion: vsphereprovider.openshift.io/v1beta1
+          credentialsSecret:
+            name: vsphere-cloud-credentials
+          diskGiB: {{ vm_disk }}
+          kind: VSphereMachineProviderSpec
+          memoryMiB: {{ vm_ram }}
+          metadata:
+            creationTimestamp: null
+          network:
+            devices:
+            - networkName: "{{ vm_network_name }}"
+          numCPUs: {{ vm_cpu }}
+          numCoresPerSocket: {{ vm_corepersocket }}
+          snapshot: ""
+          template: {{ vm_template_name }} 
+          userDataSecret:
+            name: worker-user-data
+          workspace:
+            datacenter: {{ vcenter_datacenter_name }} 
+            datastore: {{ vcenter_datastore_name }} 
+            folder: {{ vcenter_vm_folder_path }} 
+            resourcepool: {{ vsphere_resource_pool }} 
+            server: {{ vcenter_server_ip }} 

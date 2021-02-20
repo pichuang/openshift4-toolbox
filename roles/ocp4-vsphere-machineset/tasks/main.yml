@@ -1,0 +1,45 @@
+---
+- name: Obtain the infrastructure ID by running
+  command: 'oc get -o jsonpath="{.status.infrastructureName}{\"\n\"}" infrastructure cluster'
+  register: infra_id
+
+- debug:
+    msg: "{{ infra_id.stdout }}"
+
+- set_fact:
+    infrastructure_id: "{{ infra_id.stdout }}"
+    machineset_filename: "{{ infra_id.stdout }}-{{ role }}-machineset.yml"
+
+- name: Create "{{ yaml_directory_name }}"
+  file:
+    path: "{{ yaml_directory_name }}"
+    state: directory
+
+- name: Create machineset YAML
+  template:
+    src: ocp4-machineset.yml.j2
+    dest: "{{ yaml_directory_name }}/{{ machineset_filename }}"
+
+- name: Before apply machineset
+  command:
+    cmd: "oc get machineset -n openshift-machine-api"
+  register: result
+
+- debug:
+    msg: "{{ result.stdout }}"
+
+- name: Apply {{ yaml_directory_name }}/{{ machineset_filename }}
+  command:
+    cmd: "oc apply -f {{ yaml_directory_name }}/{{ machineset_filename }}"
+  register: result
+
+- debug:
+    msg: "Stdout: {{ result.stdout }}\nStderr: {{ result.stderr }}"
+
+- name: After apply machineset
+  command:
+    cmd: "oc get machineset -n openshift-machine-api"
+  register: result
+
+- debug:
+    msg: "{{ result.stdout }}"

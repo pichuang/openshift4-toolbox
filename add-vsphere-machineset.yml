@@ -1,0 +1,27 @@
+#
+# ansible-playbook add-vsphere-machineset.yml
+#
+
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    infrastructure_id: ""
+    role: "worker"
+    vm_cpu: 4
+    vm_corepersocket: 1
+    vm_ram: 16000
+    vm_disk: 80
+    vm_network_name: DPG-Vlan76-ocp4
+    vm_template_name: rhcos-vmware.x86_64
+    vcenter_datacenter_name: HomeCloud-DC
+    vcenter_datastore_name: datastore1
+    vcenter_vm_folder_path: /HomeCloud-DC/vm/ocp4-76
+    vsphere_resource_pool: ocp4-resource-pool
+    vcenter_server_ip: vcenter.pichuang.local
+    yaml_directory_name: "/tmp/machineset"
+
+  tasks:
+    - name: Create vSphere MachinesSet
+      import_role:
+        name: ocp4-vsphere-machineset

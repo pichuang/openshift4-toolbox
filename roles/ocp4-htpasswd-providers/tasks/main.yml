@@ -1,7 +1,7 @@
 ---
 - name: Create Htpasswd Provider YAML
   template:
-    src: oauth-template.yml
+    src: oauth-template.yml.j2
     dest: "{{ directory_name }}/{{ identity_provider_name }}"
 
 - name: Backup Current Identity Provider

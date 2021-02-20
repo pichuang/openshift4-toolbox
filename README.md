@@ -16,6 +16,7 @@
 - [x] ETCD Disk Performance Report - `ansible-playbook disk-performance-etcd.yml`
 - [x] Add new account and identity provider - `ansible-playbook add-ocp4-account.yml`
 - [x] Disable default account `kubeadmin` - `ansible-playbook remove-kubeadmin.yml`
+- [x] Add Machineset on vSphere - `ansible-playbook add-vsphere-machineset.yml`
 
 ## Prerequisite
 1. Edit `hosts` and put your environment in here
