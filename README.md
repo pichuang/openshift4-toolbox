@@ -33,7 +33,7 @@ _____________|','   ///_/-------------/   |
 - [x] ETCD Backup - `ansible-playbook backup-etcd.yml`
 - [ ] ETCD Restore
 - [x] Run commands to multiple nodes within one command - `./shell.sh "timedatectl | grep -i "Local time""`
-- [x] Run commands to multiple nodes with prompt mode - `ansible-playbook -i hosts shell_prompt.yml`
+- [x] Run commands to multiple nodes with prompt mode - `ansible-playbook shell_prompt.yml`
 - [x] ETCD Health Check Report - `ansible-playbook healthcheck-etcd.yml`
 - [x] ETCD Disk Performance Report - `ansible-playbook disk-performance-etcd.yml`
 - [x] Add new account and identity provider - `ansible-playbook add-ocp4-account.yml`
@@ -42,7 +42,9 @@ _____________|','   ///_/-------------/   |
     - Prerequisite: [RedHatOfficial/ocp4-vsphere-upi-automation][1]
 - [x] Save container images to tar archive - `ansible-playbook save-containe-images.yml`
 - [x] Reboot OpenShift cluster gracefully - `ansible-playbook graceful-ocp4-reboot.yml`
+    - Youtube: https://youtu.be/G7XTY7TXltE
 - [x] Shutting down the cluster gracefully - `ansible-playbook graceful-ocp4-shutdown.yml`
+    - Youtube: https://youtu.be/Q6rv2bLXoNA
 - [x] deadman is an observation software for host status using ping. - `ansible-playbook monitoring-host-reboot.yml`
 
 ## Prerequisite

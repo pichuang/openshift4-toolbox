@@ -22,6 +22,7 @@
       when: read_this != 'yes'
   
   tasks:
+    
     - name: "Reboot ocp4 nodes"
       import_role:
         name: ocp4-cluster-status

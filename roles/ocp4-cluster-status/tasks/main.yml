@@ -16,7 +16,10 @@
     cmd: "shutdown -h 1"
   become: true
   register: result
-  when: state == "shutdown"
+  when: state == "shutdown"ib
+
+- pause:
+    minutes: 1
 
 - debug:
     msg: "{{ result }}"
