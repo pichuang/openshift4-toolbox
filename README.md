@@ -17,9 +17,12 @@
 - [x] Add new account and identity provider - `ansible-playbook add-ocp4-account.yml`
 - [x] Disable default account `kubeadmin` - `ansible-playbook remove-kubeadmin.yml`
 - [x] Add Machineset on vSphere - `ansible-playbook add-vsphere-machineset.yml`
+    - Prerequisite: [RedHatOfficial/ocp4-vsphere-upi-automation][1]
 
 ## Prerequisite
 1. Edit `hosts` and put your environment in here
 2. Use `ansible-playbook -i hosts pingpong.yml` to connect to host and verify a usable python interpreter
 3. (Optioanl) `pip3 install -r requirements.txt`
 4. Do anything you want to
+
+[1]: https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation
