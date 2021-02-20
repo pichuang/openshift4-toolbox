@@ -14,8 +14,8 @@
 - [x] Run commands to multiple nodes with prompt mode - `ansible-playbook -i hosts shell_prompt.yml`
 - [x] ETCD Health Check Report - `ansible-playbook healthcheck-etcd.yml`
 - [x] ETCD Disk Performance Report - `ansible-playbook disk-performance-etcd.yml`
-- [x] Add new account and identity provider
-- [x] Disable default account `kubeadmin`
+- [x] Add new account and identity provider - `ansible-playbook add-ocp4-account.yml`
+- [x] Disable default account `kubeadmin` - `ansible-playbook remove-kubeadmin.yml`
 
 ## Prerequisite
 1. Edit `hosts` and put your environment in here
