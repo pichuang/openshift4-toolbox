@@ -18,4 +18,4 @@ then
   exit 1
 fi
 
-ansible -i hosts openshift4 -m shell -a "$1"
+ansible openshift4 -m shell -a "$1"

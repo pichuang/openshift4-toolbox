@@ -1,0 +1,65 @@
+#
+# ansible-playbook save-container-images.yml
+#
+
+---
+- hosts: localhost
+  become: True
+  vars:
+    archive_path: /tmp/containers
+    containers:
+      - name: docker.io/nicolaka/netshoot
+        tag: latest
+        id: 6ae5a524ab39
+      - name: registry.redhat.io/rhel8/support-tools
+        tag: 8.3
+        id: 9b0af9ae39b1
+
+  tasks:
+    - name: Check directory {{ archive_path }}
+      file:
+        path: "{{ archive_path }}"
+        state: directory
+  
+    - name: Mirror from online
+      podman_image:
+        name: "{{ item.name }}"
+        tag: "{{ item.tag }}"
+        pull: True
+      tags:
+        - online
+        - mirror
+      loop: "{{ containers }}"
+
+    - name: Write to disk
+      command: >
+        skopeo copy
+          containers-storage:{{ item.name }}:{{ item.tag }}
+          docker-archive:{{ archive_path }}/{{ item.name |  regex_replace('/', '+') }}__{{ item.tag }}__{{ item.id }}.tar
+      args:
+        creates: "{{ archive_path }}/{{ item.name | regex_replace('/', '+') }}__{{ item.tag }}__{{ item.id }}.tar"
+      tags:
+        - online
+        - mirror
+      loop: "{{ containers }}"
+
+    - name: Gather info for all images
+      podman_image_info:
+        name: "{{ item.id }}"
+      register: images
+      tags:
+        - offline
+      loop: "{{ containers }}"
+
+    - name: Populate from disk
+      command: >
+        skopeo copy
+          docker-archive:{{ archive_path }}/{{ item.item.name |  regex_replace('/', '+') }}__{{ item.item.tag }}__{{ item.id }}.tar
+          containers-storage:{{ item.item.name }}:{{ item.item.tag }}
+      when: item.images | length == 0
+      tags:
+        - offline
+        - never
+      loop: "{{ images.results }}"
+      loop_control:
+        label: "{{ item.item.name }}"

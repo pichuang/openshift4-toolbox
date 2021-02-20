@@ -18,6 +18,7 @@
 - [x] Disable default account `kubeadmin` - `ansible-playbook remove-kubeadmin.yml`
 - [x] Add Machineset on vSphere - `ansible-playbook add-vsphere-machineset.yml`
     - Prerequisite: [RedHatOfficial/ocp4-vsphere-upi-automation][1]
+- [x] Save container images to tar archive - `ansible-playbook save-containe-images.yml`
 
 ## Prerequisite
 1. Edit `hosts` and put your environment in here
