@@ -1,0 +1,15 @@
+#
+# deadman is an observation software for host status using ping.
+# https://github.com/upa/deadman
+#
+# ansible-playbook monitoring-host-status.yml
+#
+---
+- hosts: localhost
+  gather_facts: true
+  vars:
+    repo_location: "/tmp/deadman"
+  tasks:
+    - import_role:
+        name: deadman
+      

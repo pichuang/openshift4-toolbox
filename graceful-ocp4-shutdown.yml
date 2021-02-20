@@ -1,0 +1,30 @@
+#
+# ansible-playbook graceful-ocp4-reboot.yml
+#
+
+---
+- hosts: openshift4
+  gather_facts: false
+  serial: 1
+  max_fail_percentage: 0
+  vars_prompt:
+    - name: read_this
+      prompt: >
+        "Are you sure you wanna SHUTDOWN the whole OpenShift 4 cluster? [No/yes]"
+      default: 'no'
+      private: no
+
+  pre_tasks:
+    - name: Exit playbook, if you dont know anything
+      fail:
+        msg: >
+          "Thanks god you use this playbook and avoid the disaster!"
+      when: read_this != 'yes'
+  
+  tasks:
+    - name: "Shutdown ocp4 nodes"
+      import_role:
+        name: ocp4-cluster-status
+      vars:
+        state: shutdown
+

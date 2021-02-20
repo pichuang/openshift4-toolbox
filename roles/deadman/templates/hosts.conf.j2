@@ -1,0 +1,14 @@
+#
+# OpenShift 4 Cluster
+#
+{% for host in groups['openshift4'] %}
+{{host}}        {{ hostvars[host].ansible_host }}
+{% endfor %}
+
+#
+# Bastion Information
+#
+gateway        {{ ansible_default_ipv4.gateway }}
+{% for host_dns in ansible_dns['nameservers'] %}
+bastion-dns     {{ host_dns }}
+{% endfor %}

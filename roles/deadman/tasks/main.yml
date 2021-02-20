@@ -1,0 +1,16 @@
+---
+- name: Pull upa/deadman repos
+  git:
+    repo: https://github.com/upa/deadman
+    dest: "{{ repo_location }}"
+    # update: yes
+    # version: master
+
+- name: Create hostfile
+  template:
+    src: hosts.conf.j2
+    dest: "{{ repo_location }}/openshift4.conf"
+
+- name: Please use command manually
+  debug:
+    msg: "{{ repo_location }}/deadman {{ repo_location }}/openshift4.conf"

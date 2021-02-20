@@ -1,0 +1,22 @@
+---
+- name: Reboot all OCP4 nodes
+  reboot:
+    msg: "Reboot manually using ansible-playbook"
+    reboot_timeout: 1800
+    test_command: uptime
+    connect_timeout: 5
+    pre_reboot_delay: 0
+    post_reboot_delay: 30
+  become: true
+  register: result
+  when: state == "reboot"
+
+- name: Shutdown all OCP4 nodes
+  command:
+    cmd: "shutdown -h 1"
+  become: true
+  register: result
+  when: state == "shutdown"
+
+- debug:
+    msg: "{{ result }}"

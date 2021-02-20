@@ -41,6 +41,9 @@ _____________|','   ///_/-------------/   |
 - [x] Add Machineset on vSphere - `ansible-playbook add-vsphere-machineset.yml`
     - Prerequisite: [RedHatOfficial/ocp4-vsphere-upi-automation][1]
 - [x] Save container images to tar archive - `ansible-playbook save-containe-images.yml`
+- [x] Reboot OpenShift cluster gracefully - `ansible-playbook graceful-ocp4-reboot.yml`
+- [x] Shutting down the cluster gracefully - `ansible-playbook graceful-ocp4-shutdown.yml`
+- [x] deadman is an observation software for host status using ping. - `ansible-playbook monitoring-host-reboot.yml`
 
 ## Prerequisite
 1. Edit `hosts` and put your environment first
