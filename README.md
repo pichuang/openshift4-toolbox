@@ -24,8 +24,8 @@ _____________|','   ///_/-------------/   |
               |===========,'
 ```
 
-## Environments
-- Red Hat OpenShift 4.6.17
+## Current Environments
+- Red Hat OpenShift 4.6.17 using [vShphere UPI][1]
 - VMware vSphere 7.0.1 build: 17005016
 - Bastion
     - Red Hat Enterprise Linux 7.9
@@ -47,7 +47,6 @@ _____________|','   ///_/-------------/   |
 
 ### OpenShift 4 Machine Management
 - [x] Add Machineset on vSphere - `ansible-playbook add-vsphere-machineset.yml`
-    - Prerequisite: [RedHatOfficial/ocp4-vsphere-upi-automation][1]
 - [x] Add MachineHealthCheck - `ansible-playbook add-machinehealthcheck.yml`
     - Youtube: https://youtu.be/ZT1IWEiw-EY
 - [x] Add MachineAutoScaler - `ansible-playbook add-machineautoscaler.yml`
@@ -68,7 +67,7 @@ _____________|','   ///_/-------------/   |
 - [x] deadman is an observation software for host status using ping. - `ansible-playbook monitoring-host-reboot.yml`
 
 ## Prerequisite
-1. Edit `hosts` and put your environment first
+1. Edit `hosts`, `ansible.cfg` and put your own environment setting first
 2. Use `ansible-playbook pingpong.yml` to connect to host and verify a usable python interpreter
 3. (Optioanl) `pip3 install -r requirements.txt`
 4. Do anything you want to
@@ -80,5 +79,8 @@ _____________|','   ///_/-------------/   |
 | 20210220 |   OK   |       4.6.17      |      2.9.15     |      RHEL 7.9      |
 | 20210220 |   OK   |       4.6.16      |     2.4.2.0     |      RHEL 7.9      |
 | 20210220 |   OK   |       4.5.31      |     2.4.2.0     |      RHEL 7.9      |
+
+## References
+- [RedHatOfficial/ocp4-vsphere-upi-automation][1]
 
 [1]: https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation
