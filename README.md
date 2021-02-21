@@ -25,7 +25,7 @@ _____________|','   ///_/-------------/   |
 ```
 
 ## Current Environments
-- Red Hat OpenShift 4.6.17 using [vShphere UPI][1]
+- Red Hat OpenShift 4.6.17 using [vSphere UPI][1]
 - VMware vSphere 7.0.1 build: 17005016
 - Bastion
     - Red Hat Enterprise Linux 7.9
@@ -51,7 +51,7 @@ _____________|','   ///_/-------------/   |
     - YouTube: https://youtu.be/ZT1IWEiw-EY
 - [x] Add MachineAutoScaler - `ansible-playbook add-machineautoscaler.yml`
 - [x] Add ClusterAutoScaler - `ansible-playbook add-clusterautoscaler.yml`
-- [x] Causing a Scaling Event for testing purpose - `./force-node-scaling-event.sh` 
+- [x] Causing a Scaling Event for testing purpose - `./force-node-scaling-event.sh`
 
 ### OpenShift 4 Power Control
 - [x] Reboot OpenShift cluster gracefully - `ansible-playbook graceful-ocp4-reboot.yml`
@@ -59,7 +59,7 @@ _____________|','   ///_/-------------/   |
 - [x] Shutting down the cluster gracefully - `ansible-playbook graceful-ocp4-shutdown.yml`
     - YouTube: https://youtu.be/Q6rv2bLXoNA
 
-### OpenShift 4 Authentication 
+### OpenShift 4 Authentication
 - [x] Add new account and identity provider - `ansible-playbook add-ocp4-account.yml`
 - [x] Disable default account `kubeadmin` - `ansible-playbook remove-kubeadmin.yml`
 
@@ -81,9 +81,14 @@ _____________|','   ///_/-------------/   |
 | 20210220 |   OK   |       4.6.16      |     2.4.2.0     |      RHEL 7.9      |
 | 20210220 |   OK   |       4.5.31      |     2.4.2.0     |      RHEL 7.9      |
 
+## Welcome to contribute!
+
+- [OpenSource Contribution Guidelines][3]
+
 ## References
 - [RedHatOfficial/ocp4-vsphere-upi-automation][1]
 - [openshift/training][2]
 
 [1]: https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation
 [2]: https://github.com/openshift/training
+[3]: https://redhat-cop.github.io/contrib/
