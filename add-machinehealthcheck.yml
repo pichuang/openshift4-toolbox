@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    role: "worker"
+    yaml_directory_name: "/tmp/machinehealthcheck"
+    unhealthyConditions:
+      - { type: "Ready", timeout: "300s", status: "False" }
+      - { type: "Ready", timeout: "300s", status: "Unknown" }
+    maxUnhealthy: "40%"
+    nodeStartupTimeout: "10m"
+
+  tasks:
+    - name: Create MachineHealthCheck
+      import_role:
+        name: ocp4-machinehealthcheck

@@ -1,0 +1,30 @@
+#
+# ansible-playbook add-machineautoscaler.yml
+#
+
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    role: "worker"
+    yaml_directory_name: "/tmp/clusterautoscaler"
+    balanceSimilarNodeGroups: true
+    podPriorityThreshold: -10
+    maxNodesTotal: 8
+    cores:
+      mins: 8
+      maxs: 128
+    memory:
+      min: 4
+      max: 256
+    scaleDown:
+      enabled: true
+      delayAfterAdd: 10m
+      delayAfterDelete: 5m
+      delayAfterFailure: 30s
+      unneededTime: 60s
+
+  tasks:
+    - name: Create ClusterAutoscaler
+      import_role:
+        name: ocp4-clusterautoscaler

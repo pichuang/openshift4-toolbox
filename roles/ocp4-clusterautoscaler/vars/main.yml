@@ -1,0 +1,22 @@
+---
+infrastructure_id: ""
+clusterautoscaler_name: ""
+clusterautoscaler_filename: ""
+
+role: "worker"
+yaml_directory_name: "/tmp/clusterautoscaler"
+balanceSimilarNodeGroups: true
+podPriorityThreshold: -10
+maxNodesTotal: 8
+cores:
+  mins: 8
+  maxs: 128
+memory:
+  min: 4
+  max: 256
+scaleDown:
+  enabled: true
+  delayAfterAdd: 10m
+  delayAfterDelete: 5m
+  delayAfterFailure: 30s
+  unneededTime: 60s

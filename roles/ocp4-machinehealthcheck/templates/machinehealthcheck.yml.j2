@@ -14,11 +14,10 @@ spec:
       machine.openshift.io/cluster-api-machine-type: {{ role }}
       machine.openshift.io/cluster-api-machineset: {{ infrastructure_id }}-{{ role }}
   unhealthyConditions:
-  - type:    "Ready"
-    timeout: "300s"
-    status: "False"
-  - type:    "Ready"
-    timeout: "300s"
-    status: "Unknown"
-  maxUnhealthy: "40%"
-  nodeStartupTimeout: "10m"
+{% for item in unhealthyConditions %}
+    - type: {{ item.type }}
+      timeout: {{ item.timeout }}
+      status: "{{ item.status }}"
+{% endfor %}
+  maxUnhealthy: {{ maxUnhealthy }}
+  nodeStartupTimeout: {{ nodeStartupTimeout }}

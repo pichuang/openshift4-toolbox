@@ -1,0 +1,9 @@
+---
+machineautoscaler_name: ""
+machineautoscaler_filename: ""
+infrastructure_id: ""
+
+role: "worker"
+yaml_directory_name: "/tmp/machineautoscaler"
+minReplicas: 1
+maxReplicas: 2

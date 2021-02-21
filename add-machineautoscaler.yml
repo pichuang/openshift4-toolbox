@@ -1,0 +1,17 @@
+#
+# ansible-playbook add-machineautoscaler.yml
+#
+
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    role: "worker"
+    yaml_directory_name: "/tmp/machineautoscaler"
+    minReplicas: 1
+    maxReplicas: 2
+
+  tasks:
+    - name: Create MachineAutoscaler
+      import_role:
+        name: ocp4-machineautoscaler

@@ -1,0 +1,12 @@
+---
+machinehealcheck_name: ""
+machinehealcheck_filename: ""
+infrastructure_id: ""
+
+role: "worker"
+yaml_directory_name: "/tmp/machinehealthcheck"
+unhealthyConditions:
+  - { type: "Ready", timeout: "300s", status: "False" }
+  - { type: "Ready", timeout: "300s", status: "Unknown" }
+maxUnhealthy: "40%"
+nodeStartupTimeout: "10m"

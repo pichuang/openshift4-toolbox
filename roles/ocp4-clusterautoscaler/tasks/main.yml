@@ -8,15 +8,16 @@
 
 - set_fact:
     infrastructure_id: "{{ infra_id.stdout }}"
-    machinehealcheck_name: "{{ infra_id.stdout }}-{{ role }}-machinehealthcheck"
-    machinehealcheck_filename: "{{ infra_id.stdout }}-{{ role }}-machinehealthcheck.yml"
-    
+
+    clusterautoscaler_name: "{{ infra_id.stdout }}-{{ role }}-clusterautoscaler"
+    clusterautoscaler_filename: "{{ infra_id.stdout }}-{{ role }}-clusterautoscaler.yml"
+
 - name: Create "{{ yaml_directory_name }}"
   file:
     path: "{{ yaml_directory_name }}"
     state: directory
 
-- name: Create MachineHealthCheck File
+- name: Create ClusterAutoScaler File - "{{ yaml_directory_name }}/{{ clusterautoscaler_filename }}"
   template:
-    src: machinehealthcheck.yml.j2
-    dest: "{{ yaml_directory_name }}/{{ machinehealcheck_filename }}"
+    src: clusterautoscaler.yml.j2
+    dest: "{{ yaml_directory_name }}/{{ clusterautoscaler_filename }}"
