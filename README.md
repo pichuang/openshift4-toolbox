@@ -45,6 +45,8 @@ _____________|','   ///_/-------------/   |
 - [x] Disable default account `kubeadmin` - `ansible-playbook remove-kubeadmin.yml`
 - [x] Add Machineset on vSphere - `ansible-playbook add-vsphere-machineset.yml`
     - Prerequisite: [RedHatOfficial/ocp4-vsphere-upi-automation][1]
+- [x] Add MachineHealthCheck on vSphere - `ansible-playbook add-vsphere-machinehealthcheck.yml`
+    - Youtube: https://youtu.be/ZT1IWEiw-EY
 - [x] Save container images to tar archive - `ansible-playbook save-containe-images.yml`
 - [x] Reboot OpenShift cluster gracefully - `ansible-playbook graceful-ocp4-reboot.yml`
     - Youtube: https://youtu.be/G7XTY7TXltE
