@@ -1,0 +1,22 @@
+---
+- name: Obtain the infrastructure ID by running
+  command: 'oc get -o jsonpath="{.status.infrastructureName}{\"\n\"}" infrastructure cluster'
+  register: infra_id
+
+- debug:
+    msg: "{{ infra_id.stdout }}"
+
+- set_fact:
+    infrastructure_id: "{{ infra_id.stdout }}"
+    machinehealcheck_name: "{{ infra_id.stdout }}-{{ role }}-machinehealthcheck"
+    machinehealcheck_filename: "{{ infra_id.stdout }}-{{ role }}-machinehealthcheck.yml"
+    
+- name: Create "{{ yaml_directory_name }}"
+  file:
+    path: "{{ yaml_directory_name }}"
+    state: directory
+
+- name: Create MachineHealthCheck File
+  template:
+    src: machinehealthcheck.yml.j2
+    dest: "{{ yaml_directory_name }}/{{ machinehealcheck_filename }}"

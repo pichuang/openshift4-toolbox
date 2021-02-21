@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    role: "worker"
+    yaml_directory_name: "/tmp/machinehealthcheck"
+
+  tasks:
+    - name: Create MachineHealthCheck
+      import_role:
+        name: ocp4-vsphere-machinehealthcheck

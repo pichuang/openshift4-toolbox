@@ -1,0 +1,24 @@
+---
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineHealthCheck
+metadata:
+  name: {{ machinehealcheck_name }}
+  namespace: openshift-machine-api
+  annotations:
+    machine.openshift.io/remediation-strategy: ""
+spec:
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: {{ infrastructure_id }}
+      machine.openshift.io/cluster-api-machine-role: {{ role }}
+      machine.openshift.io/cluster-api-machine-type: {{ role }}
+      machine.openshift.io/cluster-api-machineset: {{ infrastructure_id }}-{{ role }}
+  unhealthyConditions:
+  - type:    "Ready"
+    timeout: "300s"
+    status: "False"
+  - type:    "Ready"
+    timeout: "300s"
+    status: "Unknown"
+  maxUnhealthy: "40%"
+  nodeStartupTimeout: "10m"
