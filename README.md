@@ -70,7 +70,7 @@ _____________|','   ///_/-------------/   |
 1. Edit `hosts`, `ansible.cfg` and put your own environment setting first
 2. Use `ansible-playbook pingpong.yml` to connect to host and verify a usable python interpreter
 3. (Optioanl) `pip3 install -r requirements.txt`
-4. Do anything you want to
+4. Do anything you want to do
 
 ## Tested Recording
 
