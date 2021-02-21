@@ -51,6 +51,7 @@ _____________|','   ///_/-------------/   |
     - YouTube: https://youtu.be/ZT1IWEiw-EY
 - [x] Add MachineAutoScaler - `ansible-playbook add-machineautoscaler.yml`
 - [x] Add ClusterAutoScaler - `ansible-playbook add-clusterautoscaler.yml`
+- [x] Causing a Scaling Event for testing purpose - `./force-node-scaling-event.sh` 
 
 ### OpenShift 4 Power Control
 - [x] Reboot OpenShift cluster gracefully - `ansible-playbook graceful-ocp4-reboot.yml`
@@ -82,5 +83,7 @@ _____________|','   ///_/-------------/   |
 
 ## References
 - [RedHatOfficial/ocp4-vsphere-upi-automation][1]
+- [openshift/training][2]
 
 [1]: https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation
+[2]: https://github.com/openshift/training
