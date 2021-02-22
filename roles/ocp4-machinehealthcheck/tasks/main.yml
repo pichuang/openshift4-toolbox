@@ -9,7 +9,7 @@
 - set_fact:
     infrastructure_id: "{{ infra_id.stdout }}"
     machinehealcheck_name: "{{ infra_id.stdout }}-{{ role }}-machinehealthcheck"
-    machinehealcheck_filename: "{{ infra_id.stdout }}-{{ role }}-machinehealthcheck.yml"
+    machinehealcheck_filename: "mhc-{{ infra_id.stdout }}-{{ role }}.yml"
     
 - name: Create "{{ yaml_directory_name }}"
   file:
