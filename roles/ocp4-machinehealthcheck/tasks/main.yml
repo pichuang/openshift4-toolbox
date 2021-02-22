@@ -20,3 +20,27 @@
   template:
     src: machinehealthcheck.yml.j2
     dest: "{{ yaml_directory_name }}/{{ machinehealcheck_filename }}"
+
+- name: Before apply MachineHealthCheck
+  command:
+    cmd: "oc get machinehealthcheck -n openshift-machine-api"
+  register: result
+
+- debug:
+    msg: "{{ result.stdout }}"
+
+- name: Apply {{ yaml_directory_name }}/{{ machinehealcheck_filename }}
+  command:
+    cmd: "oc apply -f {{ yaml_directory_name }}/{{ machinehealcheck_filename }}"
+  register: result
+
+- debug:
+    msg: "Stdout: {{ result.stdout }}\nStderr: {{ result.stderr }}"
+
+- name: After apply machineset
+  command:
+    cmd: "oc get machinehealthcheck -n openshift-machine-api"
+  register: result
+
+- debug:
+    msg: "{{ result.stdout }}"
