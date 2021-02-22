@@ -9,7 +9,7 @@
     role: "worker"
     yaml_directory_name: "/tmp/machineautoscaler"
     minReplicas: 1
-    maxReplicas: 2
+    maxReplicas: 3
 
   tasks:
     - name: Create MachineAutoscaler

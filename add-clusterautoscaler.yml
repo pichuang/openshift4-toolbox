@@ -9,7 +9,7 @@
     yaml_directory_name: "/tmp/clusterautoscaler"
     balanceSimilarNodeGroups: true
     podPriorityThreshold: -10
-    maxNodesTotal: 8
+    maxNodesTotal: 20
     cores:
       mins: 8
       maxs: 128
