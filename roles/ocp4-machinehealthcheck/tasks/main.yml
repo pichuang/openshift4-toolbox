@@ -37,7 +37,7 @@
 - debug:
     msg: "Stdout: {{ result.stdout }}\nStderr: {{ result.stderr }}"
 
-- name: After apply machineset
+- name: After apply machinehealthcheck
   command:
     cmd: "oc get machinehealthcheck -n openshift-machine-api"
   register: result
