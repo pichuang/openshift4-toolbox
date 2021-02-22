@@ -8,8 +8,8 @@
 
 - set_fact:
     infrastructure_id: "{{ infra_id.stdout }}"
-    machineautoscaler_name: "{{ infra_id.stdout }}-{{ role }}-machineautoscaler"
-    machineautoscaler_filename: "{{ infra_id.stdout }}-{{ role }}-machineautoscaler.yml"
+    machineautoscaler_name: "ma-{{ infra_id.stdout }}-{{ role }}"
+    machineautoscaler_filename: "ma-{{ infra_id.stdout }}-{{ role }}.yml"
 
 - name: Create "{{ yaml_directory_name }}"
   file:

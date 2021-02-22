@@ -9,8 +9,8 @@
 - set_fact:
     infrastructure_id: "{{ infra_id.stdout }}"
 
-    clusterautoscaler_name: "{{ infra_id.stdout }}-{{ role }}-clusterautoscaler"
-    clusterautoscaler_filename: "{{ infra_id.stdout }}-{{ role }}-clusterautoscaler.yml"
+    clusterautoscaler_name: "ca-{{ infra_id.stdout }}-{{ role }}"
+    clusterautoscaler_filename: "ca-{{ infra_id.stdout }}-{{ role }}.yml"
 
 - name: Create "{{ yaml_directory_name }}"
   file:
@@ -21,3 +21,27 @@
   template:
     src: clusterautoscaler.yml.j2
     dest: "{{ yaml_directory_name }}/{{ clusterautoscaler_filename }}"
+
+- name: Before apply ClusterAutoScaler
+  command:
+    cmd: "oc get clusterautoscaler -n openshift-machine-api"
+  register: result
+
+- debug:
+    msg: "{{ result.stdout }}"
+
+- name: Apply {{ yaml_directory_name }}/{{ clusterautoscaler_filename }}
+  command:
+    cmd: "oc apply -f {{ yaml_directory_name }}/{{ clusterautoscaler_filename }}"
+  register: result
+
+- debug:
+    msg: "Stdout: {{ result.stdout }}\nStderr: {{ result.stderr }}"
+
+- name: After apply clusterautoscaler
+  command:
+    cmd: "oc get clusterautoscaler -n openshift-machine-api"
+  register: result
+
+- debug:
+    msg: "{{ result.stdout }}"
