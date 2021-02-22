@@ -16,7 +16,7 @@
     cmd: "shutdown -h 1"
   become: true
   register: result
-  when: state == "shutdown"ib
+  when: state == "shutdown"
 
 - pause:
     minutes: 1
