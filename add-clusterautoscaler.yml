@@ -6,7 +6,6 @@
 - hosts: localhost
   gather_facts: false
   vars:
-    role: "worker"
     yaml_directory_name: "/tmp/clusterautoscaler"
     balanceSimilarNodeGroups: true
     podPriorityThreshold: -10

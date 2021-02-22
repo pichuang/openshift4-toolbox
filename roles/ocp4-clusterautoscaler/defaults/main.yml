@@ -3,7 +3,6 @@ infrastructure_id: ""
 clusterautoscaler_name: ""
 clusterautoscaler_filename: ""
 
-role: "worker"
 yaml_directory_name: "/tmp/clusterautoscaler"
 balanceSimilarNodeGroups: true
 podPriorityThreshold: -10

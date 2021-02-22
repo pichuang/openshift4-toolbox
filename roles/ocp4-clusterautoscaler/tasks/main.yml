@@ -9,8 +9,8 @@
 - set_fact:
     infrastructure_id: "{{ infra_id.stdout }}"
 
-    clusterautoscaler_name: "ca-{{ infra_id.stdout }}-{{ role }}"
-    clusterautoscaler_filename: "ca-{{ infra_id.stdout }}-{{ role }}.yml"
+    clusterautoscaler_name: "ca-{{ infra_id.stdout }}-default"
+    clusterautoscaler_filename: "ca-{{ infra_id.stdout }}-default.yml"
 
 - name: Create "{{ yaml_directory_name }}"
   file:
