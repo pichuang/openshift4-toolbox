@@ -20,3 +20,27 @@
   template:
     src: machineautoscaler.yml.j2
     dest: "{{ yaml_directory_name }}/{{ machineautoscaler_filename }}"
+
+- name: Before apply MachineAutoScaler
+  command:
+    cmd: "oc get machineautoscaler -n openshift-machine-api"
+  register: result
+
+- debug:
+    msg: "{{ result.stdout }}"
+
+- name: Apply {{ yaml_directory_name }}/{{ machineautoscaler_filename }}
+  command:
+    cmd: "oc apply -f {{ yaml_directory_name }}/{{ machineautoscaler_filename }}"
+  register: result
+
+- debug:
+    msg: "Stdout: {{ result.stdout }}\nStderr: {{ result.stderr }}"
+
+- name: After apply machineautoscaler
+  command:
+    cmd: "oc get machineautoscaler -n openshift-machine-api"
+  register: result
+
+- debug:
+    msg: "{{ result.stdout }}"
