@@ -22,4 +22,4 @@
         result_regex: "99th"
 
     - debug:
-        var: "{{ result.stdout }}"
+        msg: "{{ result.stdout }}"
