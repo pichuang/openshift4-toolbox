@@ -10,7 +10,7 @@
     - name: read_this
       prompt: >
         "READ THIS FIRSTIf you follow this procedure before another user is a cluster-admin, then OpenShift Container Platform **MUST BE** reinstalled. It is not possible to undo this command. Agree? [No/yes]"
-      default: 'no'
+      default: "no"
       private: no
 
     - name: cluster_admin_username
@@ -40,7 +40,7 @@
       command:
         cmd: "oc delete secrets kubeadmin -n kube-system"
       register: result
-      when: read_this != 'yes'
+      when: read_this == "yes"
     
     - debug:
         msg: "{{ result }}"
