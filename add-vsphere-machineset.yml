@@ -10,8 +10,8 @@
     role: "worker"
     vm_cpu: 4
     vm_corepersocket: 1
-    vm_ram: 16000
-    vm_disk: 80
+    vm_ram: 16384
+    vm_disk: 40
     vm_network_name: DPG-Vlan76-ocp4
     vm_template_name: rhcos-vmware.x86_64
     vcenter_datacenter_name: HomeCloud-DC
