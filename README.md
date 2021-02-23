@@ -50,6 +50,7 @@ _____________|','   ///_/-------------/   |
 - [x] Add MachineHealthCheck - `ansible-playbook add-machinehealthcheck.yml`
     - YouTube: https://youtu.be/ZT1IWEiw-EY
 - [x] Add MachineAutoScaler - `ansible-playbook add-machineautoscaler.yml`
+    - YouTube: https://youtu.be/vWrJ-NCO2oc
 - [x] Add ClusterAutoScaler - `ansible-playbook add-clusterautoscaler.yml`
 - [x] Causing a Scaling Event for testing purpose - `./force-node-scaling-event.sh`
 
