@@ -64,6 +64,15 @@ _____________|','   ///_/-------------/   |
 - [x] Add new account and identity provider - `ansible-playbook add-ocp4-account.yml`
 - [x] Disable default account `kubeadmin` - `ansible-playbook remove-kubeadmin.yml`
 
+### OpenShift 4 Time
+- [ ] Change Timezone
+
+### OpenShift 4 Certificates
+- [ ] Add API server certificates
+
+### NFS
+- [ ] Install [NFS Suvbdir External Provisioner][6]
+
 ### Service Mesh
 - [x] Install [Red Hat Service Mesh][4]
 
@@ -102,3 +111,4 @@ _____________|','   ///_/-------------/   |
 [3]: https://redhat-cop.github.io/contrib/
 [4]: https://github.com/pichuang/redhat-service-mesh-demo
 [5]: https://github.com/pichuang/redhat-acm-demo
+[6]: https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
