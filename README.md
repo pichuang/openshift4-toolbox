@@ -69,6 +69,7 @@ _____________|','   ///_/-------------/   |
 - [ ] Pull Audit Log
 
 ### OpenShift 4 Time
+- [x] Check System Time - `ansible-playbook check-system-time.yml`
 - [ ] Change Timezone
 
 ### OpenShift 4 Certificates

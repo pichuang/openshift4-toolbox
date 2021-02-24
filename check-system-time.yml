@@ -1,0 +1,26 @@
+#
+# ansible-playbook check-timedatectl.yml
+#
+
+---
+- hosts: openshift4
+  gather_facts: no
+
+  tasks:
+    - name: Check Timedatectl
+      command:
+        cmd: "timedatectl"
+      become: true
+      register: timedatectl_result
+
+    - debug:
+        msg: "{{ timedatectl_result.stdout }}"
+
+    - name: Check Chronyd status
+      command:
+        cmd: "chronyc -4 -n sources"
+      register: chronyc_result
+
+    - debug:
+        msg: "{{ chronyc_result.stdout }}"
+
