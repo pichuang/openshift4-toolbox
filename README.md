@@ -38,7 +38,7 @@ _____________|','   ///_/-------------/   |
     - YouTube: https://youtu.be/hVijextRADs
 - [x] ETCD Health Check Report - `ansible-playbook healthcheck-etcd.yml`
     - YouTube: https://youtu.be/FGwCmCuQNrg
-- [x] ETCD Disk Performance Report - `ansible-playbook disk-performance-etcd.yml`
+- [x] ETCD Disk Performance Report - `ansible-playbook check-disk-performance-etcd.yml`
     - YouTube: https://youtu.be/6qjsh9J3ndM
 - [x] Use `ionice` to set high i/o priority for etcd process - `ansible-playbook ionice-etcd.yml`
 

@@ -1,5 +1,5 @@
 #
-# ansible-playbook disk-performance-etcd.yml
+# ansible-playbook check-disk-performance-etcd.yml
 #
 
 ---
