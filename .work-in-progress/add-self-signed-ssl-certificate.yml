@@ -1,0 +1,70 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars:
+    ssl_directory: "/tmp/openssl"
+    ssl_name: "api.dmz.ocp4.local"
+    country_name: "TW"
+    organization_name: "HomeCloud"
+    email_address: "phil.huang@redhat.com"
+    common_name: "api.dmz.ocp4.local"
+    subject_alt_name: "DNS:api.dmz.ocp4.local"
+
+  tasks:
+  - name: Create SSL directories - {{ ssl_directory }}
+    file:
+      path: "{{ item }}"
+      state: directory
+    loop:
+      - "{{ ssl_directory }}/crt"
+      - "{{ ssl_directory }}/csr"
+      - "{{ ssl_directory }}/private"
+
+  - name: Generate an OpenSSL private key {{ ssl_name }} with the default values (4096 bits, RSA)
+    openssl_privatekey:
+      path: "{{ ssl_directory }}/private/{{ ssl_name }}.pem"
+      type: RSA
+
+  - name: Generate an OpenSSL Certificate Signing Request
+    openssl_csr:
+      path: "{{ ssl_directory }}/csr/{{ ssl_name }}.csr"
+      privatekey_path: "{{ ssl_directory }}/private/{{ ssl_name }}.pem"
+      country_name: "{{ country_name }}"
+      organization_name: "{{ organization_name }}"
+      email_address: "{{ email_address }}"
+      common_name: "{{ common_name }}"
+      subject_alt_name: "{{ subject_alt_name }}"
+
+  - name: Generate a Self Signed OpenSSL certificate
+    openssl_certificate:
+      path: "{{ ssl_directory }}/crt/{{ ssl_name }}.crt"
+      privatekey_path: "{{ ssl_directory }}/private/{{ ssl_name }}.pem"
+      csr_path: "{{ ssl_directory }}/csr/{{ ssl_name }}.csr"
+      provider: selfsigned
+  
+  # - name: Get information on the CSR
+  #   openssl_csr_info:
+  #     path: "{{ ssl_directory }}/csr/{{ ssl_name }}.csr"
+  #   register: result
+
+  # - name: Dump CSR information
+  #   debug:
+  #     var: result
+
+  - name: Get information on generated certificate
+    openssl_certificate_info:
+      path: "{{ ssl_directory }}/crt/{{ ssl_name }}.crt"
+    register: result
+
+  - name: Dump CRT information
+    debug:
+      var: result
+
+  - name: Get information on private key
+    openssl_privatekey_info:
+      path: "{{ ssl_directory }}/private/{{ ssl_name }}.pem"
+    register: result
+
+  - name: Dump private key information
+    debug:
+      var: result

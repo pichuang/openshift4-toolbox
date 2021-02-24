@@ -1,0 +1,39 @@
+#
+# ansible-playbook -i hosts ionice-etcd.yaml
+#
+
+---
+- hosts: master
+  gather_facts: false
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ https_proxy }}"
+
+  tasks:
+  - name: Query etcd process
+    command:
+      cmd: "pgrep etcd"
+    register: result
+
+  - set_fact:
+      etcd_process: "{{ result.stdout_lines }}"
+
+  - name: Show current priority and class of etcd process
+    shell:
+      cmd: "ionice -p {{ item }}"
+    become: true
+    with_items:
+      - "{{ result.stdout_lines }}"
+    register: gg
+  
+  - debug:
+      msg: "{{ item }}" 
+    with_items:
+      - "{{ gg.results }}"
+
+  - name: Setup priority 0 and class 2 for etcd process
+    shell:
+      cmd: "ionice -c2 -n0 -p {{ item }}"
+    become: true
+    with_items:
+      - "{{ result.stdout_lines }}"
