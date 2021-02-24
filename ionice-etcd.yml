@@ -21,7 +21,6 @@
   - name: Show current priority and class of etcd process
     shell:
       cmd: "ionice -p {{ item }}"
-    become: true
     with_items:
       - "{{ result.stdout_lines }}"
     register: gg
