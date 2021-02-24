@@ -23,4 +23,11 @@
 
     - debug:
         msg: "{{ chronyc_result.stdout }}"
+  
+    - name: Check Chrony source
+      command: "chronyc sourcestats"
+      register: sourcestats_result
+
+    - debug:
+        msg: "{{ sourcestats_result.stdout }}" 
 

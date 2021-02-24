@@ -1,0 +1,24 @@
+---
+- hosts: openshift4
+  gather_facts: no
+  vars:
+    chrony_location: "/tmp/chronyd/"
+    timezone: "Asia/Taipei"
+    ntp_server_list:
+      - ntp.pichuang.local
+      - time.google.com
+    mcp:
+      - worker
+      - master
+
+  tasks:
+    - import_role:
+        name: ocp4-chronyd
+      run_once: true
+      delegate_to: localhost
+
+    
+    - name: Setup "{{ timezone }}"
+      command:
+        cmd: "timedatectl set-timezone {{ timezone }}"
+      become: true

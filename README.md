@@ -70,7 +70,7 @@ _____________|','   ///_/-------------/   |
 
 ### OpenShift 4 Time
 - [x] Check System Time - `ansible-playbook check-system-time.yml`
-- [ ] Change Timezone
+- [x] Change Timezone - `ansible-playbook config-time-service.yml`
 
 ### OpenShift 4 Certificates
 - [ ] Add API server certificates

@@ -1,0 +1,29 @@
+---
+- name: Create "{{ chrony_location }}" directory
+  file:
+    path: "{{ chrony_location }}"
+    state: directory
+
+- name: Create the chrony.conf file
+  template:
+    src: chrony.conf.j2
+    dest: "{{ chrony_location }}/chrony.conf"
+    mode: '0664'
+
+- name: Save base64 of config file
+  set_fact:
+    chrony_base64: "{{ (lookup('file', '{{ chrony_location }}/chrony.conf') + '\n') | b64encode }}"
+
+- name: Generate the machineconfigs for chrony
+  template:
+    src: mc-chrony-configuration.yaml.j2
+    dest: "{{ chrony_location }}/99-{{ item }}-chrony-configuration.yaml"
+    mode: '0664'
+  with_items:
+    - "{{ mcp }}"
+
+- name: Apply machineconfig-chrony-configuration.yml
+  command:
+    cmd: "oc apply -f {{ chrony_location }}/99-{{ item }}-chrony-configuration.yaml"
+  with_items:
+    - "{{ mcp }}"
