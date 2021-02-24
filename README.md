@@ -40,6 +40,7 @@ _____________|','   ///_/-------------/   |
     - YouTube: https://youtu.be/FGwCmCuQNrg
 - [x] ETCD Disk Performance Report - `ansible-playbook disk-performance-etcd.yml`
     - YouTube: https://youtu.be/6qjsh9J3ndM
+- [x] Use `ionice` to set high i/o priority for etcd process - `ansible-playbook ionice-etcd.yml`
 
 ### Execute commands on specifc nodes
 - [x] Run commands to multiple nodes within one command - `./shell.sh "timedatectl | grep -i "Local time""`
