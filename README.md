@@ -80,6 +80,7 @@ _____________|','   ///_/-------------/   |
 
 ### Service Mesh
 - [x] Install [Red Hat Service Mesh][4]
+- [ ] [OpenShift Service Mesh Workshop][9]
 
 ### ACM
 - [x] Install [Red Hat Advanced Cluster Management for Kubernetes][5]
@@ -113,6 +114,7 @@ _____________|','   ///_/-------------/   |
 - [openshift/training][2]
 - [openshift-tools Best Practices Guide][7]
 - [openshift-tools Style Guide][8]
+- [RedHatGov/service-mesh-workshop-dashboard][9]
 
 [1]: https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation
 [2]: https://github.com/openshift/training
@@ -122,3 +124,4 @@ _____________|','   ///_/-------------/   |
 [6]: https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
 [7]: https://github.com/openshift/openshift-tools/blob/prod/docs/best_practices_guide.adoc
 [8]: https://github.com/openshift/openshift-tools/blob/prod/docs/style_guide.adoc
+[9]: https://github.com/RedHatGov/service-mesh-workshop-dashboard/
