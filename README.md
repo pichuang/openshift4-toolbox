@@ -111,6 +111,8 @@ _____________|','   ///_/-------------/   |
 ## References
 - [RedHatOfficial/ocp4-vsphere-upi-automation][1]
 - [openshift/training][2]
+- [openshift-tools Best Practices Guide][7]
+- [openshift-tools Style Guide][8]
 
 [1]: https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation
 [2]: https://github.com/openshift/training
@@ -118,3 +120,5 @@ _____________|','   ///_/-------------/   |
 [4]: https://github.com/pichuang/redhat-service-mesh-demo
 [5]: https://github.com/pichuang/redhat-acm-demo
 [6]: https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
+[7]: https://github.com/openshift/openshift-tools/blob/prod/docs/best_practices_guide.adoc
+[8]: https://github.com/openshift/openshift-tools/blob/prod/docs/style_guide.adoc
