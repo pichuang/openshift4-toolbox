@@ -115,6 +115,8 @@ _____________|','   ///_/-------------/   |
 - [openshift-tools Best Practices Guide][7]
 - [openshift-tools Style Guide][8]
 - [RedHatGov/service-mesh-workshop-dashboard][9]
+- [ahmetb/kubernetes-network-policy-recipes][10]
+- [Welcome to the Network Policy Editor!][11]
 
 [1]: https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation
 [2]: https://github.com/openshift/training
@@ -125,3 +127,5 @@ _____________|','   ///_/-------------/   |
 [7]: https://github.com/openshift/openshift-tools/blob/prod/docs/best_practices_guide.adoc
 [8]: https://github.com/openshift/openshift-tools/blob/prod/docs/style_guide.adoc
 [9]: https://github.com/RedHatGov/service-mesh-workshop-dashboard/
+[10]: https://github.com/ahmetb/kubernetes-network-policy-recipes
+[11]: https://editor.cilium.io/
