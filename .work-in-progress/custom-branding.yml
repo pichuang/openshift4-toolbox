@@ -1,0 +1,11 @@
+---
+apiVersion: operator.openshift.io/v1
+kind: Console
+metadata:
+   name: cluster
+spec:
+   customization:
+      customProductName: WhiteProduct
+      customLogoFile:
+         name: console-custom-logo
+         key: kubernetes-horizontal-white.png
