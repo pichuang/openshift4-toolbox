@@ -20,8 +20,8 @@
       enabled: true
       delayAfterAdd: 10m
       delayAfterDelete: 5m
-      delayAfterFailure: 30s
-      unneededTime: 60s
+      delayAfterFailure: 5m
+      unneededTime: 5m
 
   tasks:
     - name: Create ClusterAutoscaler

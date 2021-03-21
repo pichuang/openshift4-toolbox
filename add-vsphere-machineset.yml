@@ -16,7 +16,7 @@
     vm_template_name: rhcos-vmware.x86_64
     vcenter_datacenter_name: HomeCloud-DC
     vcenter_datastore_name: esxi-1.ocp
-    vcenter_vm_folder_path: /HomeCloud-DC/vm/ocp4-76
+    vcenter_vm_folder_path: /HomeCloud-DC/vm/dmz-ocp4-76
     vsphere_resource_pool: ocp4-worker-pool
     vcenter_server_ip: vcenter.pichuang.local
     yaml_directory_name: "/tmp/machineset"
