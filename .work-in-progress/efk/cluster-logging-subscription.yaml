@@ -6,7 +6,6 @@ metadata:
   namespace: openshift-logging
 spec:
   channel: "4.6"
-  installPlanApproval: Automatic
   name: cluster-logging
   source: redhat-operators
   sourceNamespace: openshift-marketplace

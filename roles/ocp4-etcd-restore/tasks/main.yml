@@ -1,0 +1,66 @@
+---
+- name: Define backup dir name
+  set_fact:
+    etcd_tarball: "{{ bastion_etcd_dirname }}.tar.gz"
+
+- name: Debug Source Machine (Bastion) - Backup Path
+  debug:
+    msg: "Source Machine (Bastion) Backup Direcotory: {{ bastion_backup_dir }}/{{ bastion_etcd_dirname }}"
+
+- name: Debug Destination Machine (Masters) - Backup Path
+  debug:
+    msg: "Destination Machine (Masters) Backup Direcotory: {{ masters_backup_dir }}/{{ bastion_etcd_dirname }}"
+
+- name: Tar {{ backup_src_dir }} in Bastion node
+  archive:
+    path: "{{ bastion_backup_dir }}"
+    dest: "{{ etcd_tarball }}"
+    format: gz
+  become: true
+
+- name: Perform ETCD restore
+  shell: /usr/local/bin/cluster-backup.sh "{{ backup_src_dir }}"
+  become: true
+
+- name: Tar {{ backup_src_dir }} in ETCD node
+  archive:
+    path: "{{ backup_src_dir }}"
+    dest: "{{ etcd_tarball }}"
+    format: gz
+  become: true
+
+- name: Fetch ETCD backup dir
+  fetch:
+    src: "{{ etcd_tarball }}"
+    dest: "{{ bastion_backup_dir }}/"
+    flat: yes
+
+- name: Untar ETCD tarball in bastion node
+  unarchive:
+    src: "{{ bastion_backup_dir }}/{{ etcd_tarball }}"
+    dest: "{{ bastion_backup_dir }}"
+  connection: local
+
+# - name: Create a symbolic link to latest backup
+#   file:
+#     src: "{{ backup_dst_dir }}"
+#     dest: "{{ backup_dst_dir_latest }}"
+#     state: link
+#   delegate_to: localhost
+  
+- name: Clean backup file on etcd node
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ backup_src_dir }}"
+    - "{{ etcd_backup_dir }}/{{ etcd_tarball }}"
+  become: true
+
+- name: Clean backup file on master node
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ bastion_backup_dir }}/{{ etcd_tarball }}"
+  connection: local

@@ -1,0 +1,29 @@
+#
+# ansible-playbook restore-etcd.yml
+#
+
+---
+- hosts: all
+  gather_facts: false
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ https_proxy }}"
+
+  vars_prompt:
+    - name: bastion_backup_dir
+      prompt: >
+        "Type Backup path [/tmp] #"
+      default: '/tmp/'
+      private: no
+  
+    - name: bastion_etcd_dirname
+      prompt: >
+        "Type Backup directory name [etcd-backup]#"
+      default: 'etcd-backup'
+      private: no
+
+  tasks:
+    - name: Perform ETCD Restore
+      import_role:
+        name: ocp4-etcd-restore
+  
