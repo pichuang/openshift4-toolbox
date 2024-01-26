@@ -20,7 +20,7 @@
       file:
         path: "{{ archive_path }}"
         state: directory
-  
+
     - name: Mirror from online
       podman_image:
         name: "{{ item.name }}"
