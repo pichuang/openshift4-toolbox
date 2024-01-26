@@ -25,72 +25,88 @@ _____________|','   ///_/-------------/   |
 ```
 
 ## Current Environments
+
 - Red Hat OpenShift 4.6.17 using [vSphere UPI][1]
 - VMware vSphere 7.0.1 build: 17005016
 - Bastion
-    - Red Hat Enterprise Linux 7.9
-    - Red Hat Ansible 2.9.15
-    - Python 3.6.8
+  - Red Hat Enterprise Linux 7.9
+  - Red Hat Ansible 2.9.15
+  - Python 3.6.8
 
 ## Toolbox
+
 ### OpenShift 4 ETCD
+
 - [x] ETCD Backup - `ansible-playbook backup-etcd.yml`
-    - YouTube: https://youtu.be/hVijextRADs
+  - YouTube: https://youtu.be/hVijextRADs
 - [x] ETCD Health Check Report - `ansible-playbook healthcheck-etcd.yml`
-    - YouTube: https://youtu.be/FGwCmCuQNrg
+  - YouTube: https://youtu.be/FGwCmCuQNrg
 - [x] ETCD Disk Performance Report - `ansible-playbook check-disk-performance-etcd.yml`
-    - YouTube: https://youtu.be/6qjsh9J3ndM
+  - YouTube: https://youtu.be/6qjsh9J3ndM
 - [x] Use `ionice` to set high i/o priority for etcd process - `ansible-playbook ionice-etcd.yml`
 
 ### Execute commands on specifc nodes
+
 - [x] Run commands to multiple nodes within one command - `./shell.sh "timedatectl | grep -i "Local time""`
 - [x] Run commands to multiple nodes with prompt mode - `ansible-playbook shell_prompt.yml`
 
 ### OpenShift 4 Machine Management
+
 - [x] Add Machineset on vSphere - `ansible-playbook add-vsphere-machineset.yml`
 - [x] Add MachineHealthCheck - `ansible-playbook add-machinehealthcheck.yml`
-    - YouTube: https://youtu.be/ZT1IWEiw-EY
+  - YouTube: https://youtu.be/ZT1IWEiw-EY
 - [x] Add MachineAutoScaler - `ansible-playbook add-machineautoscaler.yml`
-    - YouTube: https://youtu.be/vWrJ-NCO2oc
+  - YouTube: https://youtu.be/vWrJ-NCO2oc
 - [x] Add ClusterAutoScaler - `ansible-playbook add-clusterautoscaler.yml`
 - [x] Causing a Scaling Event for testing purpose - `./force-node-scaling-event.sh`
 
 ### OpenShift 4 Power Control
+
 - [x] Reboot OpenShift cluster gracefully - `ansible-playbook graceful-ocp4-reboot.yml`
-    - YouTube: https://youtu.be/G7XTY7TXltE
+  - YouTube: https://youtu.be/G7XTY7TXltE
 - [x] Shutting down the cluster gracefully - `ansible-playbook graceful-ocp4-shutdown.yml`
-    - YouTube: https://youtu.be/Q6rv2bLXoNA
+  - YouTube: https://youtu.be/Q6rv2bLXoNA
 
 ### OpenShift 4 Authentication
+
 - [x] Add new account and identity provider - `ansible-playbook add-ocp4-account.yml`
 - [x] Disable default account `kubeadmin` - `ansible-playbook remove-kubeadmin.yml`
 
 ### OpenShift 4 Security
+
 - [ ] Pull Audit Log
 
 ### OpenShift 4 Time
-- [x] Check System Time - `ansible-playbook check-system-time.yml`
+
+- [x] Check System Time - `ansible-playbook
+- [ ] check-system-time.yml`
 - [x] Change Timezone - `ansible-playbook config-time-service.yml`
 
 ### OpenShift 4 Certificates
+
 - [ ] Add API server certificates
 
 ### NFS
+
 - [ ] Install [NFS Suvbdir External Provisioner][6]
 
 ### Service Mesh
+
 - [x] Install [Red Hat Service Mesh][4]
 - [ ] [OpenShift Service Mesh Workshop][9]
 
 ### ACM
+
 - [x] Install [Red Hat Advanced Cluster Management for Kubernetes][5]
 
 ### Misc
+
 - [x] Save container images to tar archive - `ansible-playbook save-containe-images.yml`
 - [x] deadman is an observation software for host status using ping. - `ansible-playbook monitoring-host-reboot.yml`
 - [ ] Kubeeye
 
 ## Prerequisite
+
 1. Edit `hosts`, `ansible.cfg` and put your own environment setting first
 2. Use `ansible-playbook pingpong.yml` to connect to host and verify a usable python interpreter
 3. (Optioanl) `pip3 install -r requirements.txt`
@@ -100,16 +116,26 @@ _____________|','   ///_/-------------/   |
 
 |   Date   | Status | OpenShift Version | Ansible Version | Bastion OS Version |
 |:--------:|:------:|:-----------------:|:---------------:|:------------------:|
+| 20240126 |   OK   |       4.12.27     |      2.16.2     |      RHEL 9.3      |
 | 20210222 |   OK   |       4.6.1       |      2.9.15     |      RHEL 7.9      |
 | 20210220 |   OK   |       4.6.17      |      2.9.15     |      RHEL 7.9      |
 | 20210220 |   OK   |       4.6.16      |     2.4.2.0     |      RHEL 7.9      |
 | 20210220 |   OK   |       4.5.31      |     2.4.2.0     |      RHEL 7.9      |
+
+## Develope Environment
+
+```bash
+python3 -m venv .venv
+ansible-galaxy collection install kubernetes.core:3.0.0 --force
+pip install -r ~/.ansible/collections/ansible_collections/kubernetes/core/requirements.txt
+```
 
 ## Welcome to contribute!
 
 - [OpenSource Contribution Guidelines][3]
 
 ## References
+
 - [RedHatOfficial/ocp4-vsphere-upi-automation][1]
 - [openshift/training][2]
 - [openshift-tools Best Practices Guide][7]

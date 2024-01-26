@@ -9,7 +9,7 @@ worker1 ansible_host=192.168.76.12
 worker2 ansible_host=192.168.76.13
 
 [bastion]
-localhost ansible_host=localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python3
+localhost ansible_host=localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env python3"
 
 [openshift4:children]
 master

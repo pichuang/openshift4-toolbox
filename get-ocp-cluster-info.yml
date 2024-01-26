@@ -1,0 +1,15 @@
+---
+- hosts: bastion
+  gather_facts: false
+  collections:
+    - kubernetes.core
+
+  tasks:
+    - name: Do not invalidate cache before getting information
+      k8s_cluster_info:
+        invalidate_cache: True
+      register: api_status
+
+    - name: Output API status
+      debug:
+        msg: "{{ api_status.version }}"
